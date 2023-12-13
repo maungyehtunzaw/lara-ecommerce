@@ -29,14 +29,14 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
             <!-- header -->
             <header class="py-4 shadow-sm bg-white">
                 <div class="container flex items-center justify-between">
-                    <a href="index.html">
-                        <img src="assets/images/logo.svg" alt="Logo" class="w-32">
+                    <a href="{{route('front.home')}}">
+                        <img src="/assets/images/logo.svg" alt="Logo" class="w-32">
                     </a>
 
                     <div class="w-full max-w-xl relative flex">
@@ -122,32 +122,17 @@
                     <div class="flex items-center justify-between flex-grow md:pl-12 py-2">
                         <div class="flex items-center space-x-6 capitalize">
                             <a href="index.html" class="text-gray-200 hover:text-white transition">Home</a>
-                            <a href="pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
-                            <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
-                            <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                            <a href="{{route('front.product')}}" class="text-gray-200 hover:text-white transition">Shop</a>
+                            <a href="#" class="text-gray-200 hover:text-white transition">About </a>
+                            <a href="#" class="text-gray-200 hover:text-white transition">Contact</a>
                         </div>
-                        <a href="pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
+                        <a href="/customer/login" class="text-gray-200 hover:text-white transition">Login</a>
                     </div>
                 </div>
             </nav>
             <!-- ./navbar -->
 
-            <!-- banner -->
-            <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('assets/images/banner-bg.jpg');">
-                <div class="container">
-                    <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
-                        best collection for <br> home decoration
-                    </h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam <br>
-                        accusantium perspiciatis, sapiente
-                        magni eos dolorum ex quos dolores odio</p>
-                    <div class="mt-12">
-                        <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium
-                            rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- ./banner -->
+
             <main>
                 {{ $slot }}
             </main>
@@ -156,7 +141,7 @@
     <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
         <div class="container grid grid-cols-1 ">
             <div class="col-span-1 space-y-4">
-                <img src="assets/images/logo.svg" alt="logo" class="w-30">
+                <img src="/assets/images/logo.svg" alt="logo" class="w-30">
                 <div class="mr-2">
                     <p class="text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, hic?
@@ -228,7 +213,7 @@
         <div class="container flex items-center justify-between">
             <p class="text-white">&copy; TailCommerce - All Right Reserved</p>
             <div>
-                <img src="assets/images/methods.png" alt="methods" class="h-5">
+                <img src="/assets/images/methods.png" alt="methods" class="h-5">
             </div>
         </div>
     </div>

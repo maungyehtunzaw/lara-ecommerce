@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 class CustomerAuthController extends Controller
 {
     public function showLogin(){
-        return view('front.login');
+        // dd("wtf");
+        return view('frontend.login');
     }
     public function showRegister(){
-        return view('front.register');
+        // dd("wtf");
+        return view('frontend.register');
     }
 }

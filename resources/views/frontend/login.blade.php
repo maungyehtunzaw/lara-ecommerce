@@ -1,4 +1,4 @@
-<x-front>
+<x-front-layout>
     <div class="contain py-16">
         <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
             <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
@@ -39,8 +39,8 @@
             </div>
             <!-- ./login with -->
 
-            <p class="mt-4 text-center text-gray-600">Don't have account? <a href="register.html" class="text-primary">Register
+            <p class="mt-4 text-center text-gray-600">Don't have account? <a href="/customer/register" class="text-primary">Register
                     now</a></p>
         </div>
     </div>
-</x-front>
+</x-front-layout>

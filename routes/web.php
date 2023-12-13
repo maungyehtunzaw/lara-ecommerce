@@ -39,18 +39,30 @@ Route::group([
     Route::resource('order', 'OrderController');
 });
 
+// That go for the front end.
 Route::group([
     'namespace' => 'App\Http\Controllers\Front',
-    // 'prefix' => 'user',
-    // 'middleware' => ['auth'],
 ], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/login', 'CustomerAuthController@showLogin')->name('customer.login');
-    Route::get('/register', 'CustomerAuthController@showRegister')->name('customer.register');
+    Route::get('/', 'HomeController@index')->name('front.home');
+    Route::get('/customer/login', 'CustomerAuthController@showLogin')->name('front.login');
+    Route::post('/postlogin', 'CustomerAuthController@postLogin')->name('front.postlogin');
+    Route::get('/customer/register', 'CustomerAuthController@showRegister')->name('front.register');
+    Route::post('/postregister', 'CustomerAuthController@postRegister')->name('front.postregister');
+
+    Route::get('/product', 'ProductController@showProduct')->name('front.product');
+    Route::get('/product/{id}', 'ProductController@showDetail')->name('front.product.show');
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/logout', 'CustomerAuthController@logout')->name('customer.logout');
-        Route::get('/profile', 'CustomerAuthController@profile')->name('customer.profile');
+        Route::get('/logout', 'CustomerAuthController@logout')->name('front.logout');
+        Route::get('/profile', 'CustomerAuthController@profile')->name('front.profile');
+        Route::get('/cart', 'CartController@index')->name('front.cart');
+        Route::post('/cart', 'CartController@store')->name('front.cart.store');
+
+        Route::post('/addtocart', 'CartController@update')->name('front.cart.addtocart');
+
+        Route::get('/orders', 'OrderController@index')->name('front.orders');
+        Route::get('/orders/{id}', 'OrderController@show')->name('front.orders.show');
+
     });
 
 });

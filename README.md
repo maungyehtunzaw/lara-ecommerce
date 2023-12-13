@@ -16,7 +16,7 @@ Develop a e-commerce web
  - clone the repository.
  - composer install
  - npm install
- - cp .env.example .env
+ - cp .env.example .env (or) copy .env.example and rename .env
  - php artisan key:generate
  - php artisan migrate (or) import datbases/db.sql 
  - php artisan db:seed

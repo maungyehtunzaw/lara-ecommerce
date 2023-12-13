@@ -17,6 +17,6 @@ class HomeController extends Controller
         $new_arrivals = Product::orderBy('created_at', 'desc')->take(4)->get();
         $recommended = Product::where('is_recommend', true)->take(8)->get();
         $categories = Category::take(8)->get(); // get category with most products
-        return view('front.home',compact('new_arrivals','recommended'));
+        return view('frontend.home',compact('new_arrivals','recommended'));
     }
 }
