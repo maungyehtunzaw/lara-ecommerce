@@ -12,6 +12,18 @@
 # Objective
 Develop a e-commerce web
 
+# Installation
+ - clone the repository.
+ - composer install
+ - npm install
+ - cp .env.example .env
+ - php artisan key:generate
+ - php artisan migrate (or) import datbases/db.sql 
+ - php artisan db:seed
+ - php artisan passport:client --personal
+ - php artisan ser
+ - php artisan passport
+
 # Documentation
  
     - User Manual 
