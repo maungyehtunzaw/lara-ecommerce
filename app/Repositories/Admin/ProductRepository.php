@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Models\Product;
 use App\Interfaces\Admin\ProductInterface;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductInterface
@@ -57,10 +58,25 @@ class ProductRepository implements ProductInterface
         $image->move(public_path('images'), $imageName);
         return $imageName;
     }
-    public function softDeleteProduct($product): bool{
-        return $product->delete();
+    public function softDeleteProduct($product): Response{
+
+        if( $product->delete()){
+
+            return response()->json([
+                'success'=>true,
+                'status'=>'success',
+                'message'=>'Product Deleted Successful #'.$product->name,
+            ]);
+        }
+        return response()->json([
+            'success'=>false,
+            'status'=>'error',
+            'message'=>'cannot deleted right now, try agian later',
+
+        ]);
     }
-    public function forceDeleteProduct($product): bool{
+
+    public function forceDeleteProduct($product): Response{
         return $product->forceDelete();
     }
 

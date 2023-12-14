@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
+use Illuminate\Support\Carbon;
 class ProductsDataTable extends DataTable
 {
     /**
@@ -25,6 +25,13 @@ class ProductsDataTable extends DataTable
             ->addColumn('action', 'admin.product.action')
             ->editColumn('category',function($query){
                 return $query->category->name;
+            })
+            ->editColumn('created_at',function($query){
+                // return $query->created_at->format('d-m-Y H:i');
+                return $query->created_at->diffForHumans();
+            })
+            ->editColumn('updated_at',function($query){
+                return $query->updated_at->diffForHumans();
             })
             ->setRowId('id');
     }
@@ -68,7 +75,7 @@ class ProductsDataTable extends DataTable
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(120)
                   ->addClass('text-center'),
             Column::make('id'),
             Column::make('name'),

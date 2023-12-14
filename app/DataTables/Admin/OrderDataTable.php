@@ -35,6 +35,9 @@ class OrderDataTable extends DataTable
             ->editColumn('shipping_status',function($query){
                 return "OK";
             })
+            ->editColumn('created_at',function($query){
+                return $query->created_at->format('d-m-Y H:i');
+            })
             ->setRowId('id');
     }
 
@@ -77,7 +80,7 @@ class OrderDataTable extends DataTable
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(120)
                   ->addClass('text-center'),
             Column::make('id'),
             Column::make('saleno'),
@@ -88,7 +91,6 @@ class OrderDataTable extends DataTable
             Column::make('payment_status'),
             Column::make('payment_method'),
             Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

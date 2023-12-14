@@ -1,90 +1,105 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Editing Product') }}
-            </h2>
-            <a href="{{ route('product.index') }}" class="btn btn-sm btn-primary">
-                Product List
-            </a>
-        </div>
-    </x-slot>
+@extends('adminlte::page')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    EDIT PRODUCT
+@section('title', 'Dashboard')
+@section('content_header')
+    <h1>EDIT PRODUCT</h1>
+@stop
+
+@section('content')
+
+    <div class="bg-white dark:bg-gray-800  p-2">
+
+        <form action="{{ route('product.update', $product->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <form action="{{ route('product.update',$product->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-                    <div class="grid grid-cols-2 gap-3 p-3">
-                        <div class="cols-span-1">
-                            <div class="mb-3">
-                                <label>Product Name</label>
-                                <input type="text" name="name" placeholder="Product Name" class="input input-bordered w-full @error('name') input-error @enderror"  value="{{old('name',$product->name)}}"/>
-                                @error('name')
-                                <div className="label">
-                                    <span className="label-text-alt text-red-600">{{$message}}</span>
-                                  </div>
-                                @enderror
+            @endif
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" name="name" placeholder="Product Name"
+                            class="form-control @error('name') is-invalid @enderror"
+                            value="{{ old('name', $product->name) }}" />
+                            @error('name')
+                            <div className="invalid-feedback">
+                                {{$message}}
+                              </div>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control  @error('categories_id') is-invalid @enderror" name="categories_id">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('categories_id')
+                            <div className="invalid-feedback">
+                                <span className="text-danger">{{ $message }}</span>
                             </div>
-                            <div class="mb-3">
-                                <select class="select select-bordered w-full" name="categories_id">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}
-                                    </option>
-                                @endforeach
-                                  </select>
-                                  @error('categories_id')
-                                  <div className="label">
-                                      <span className="label-text-alt text-red-600">{{$message}}</span>
-                                    </div>
-                                  @enderror
-
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="unit_rate" placeholder="Product Price" value="{{old('unit_rate',$product->unit_rate)}}"
-                                    class="input input-bordered w-full @error('unit_rate') input-error @enderror" />
-                            </div>
-                            {{-- <div class="mb-3">
-                                <input type="number" name="qty" placeholder="Product Quantity"
-                                value="{{old('qty')}}"
-                                class="input input-bordered w-full"  />
-                            </div> --}}
-                            <div class="mb-3">
-                                <textarea name="description" placeholder="Product Description"  class="textarea textarea-bordered w-full">{{old('description',$product->description)}}</textarea>
-                            </div>
-                        </div>
-                        <div class="cols-span-1">
-                            <input type="file" class="file-input file-input-bordered" />
-
-                        </div>
+                        @enderror
 
                     </div>
-                    <div class="flex justify-end p-3 space-x-2">
-                        <button type="submit"
-                            class="btn btn-primary">
-                            Update
-                        </button>
-                        <a href="{{ route('product.index') }}"
-                            class="btn btn-error ">
-                            Cancel  </a>
+                    <div class="form-group">
+                        <input type="text" name="unit_rate" placeholder="Product Price"
+                            value="{{ old('unit_rate', $product->unit_rate) }}"
+                            class="form-control @error('unit_rate') is-invalid @enderror" />
+                            @error('unit_rate')
+                            <div className="invalid-feedback">
+                                <span className="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
                     </div>
 
-                </form>
+                    <div class="form-group">
+                        <textarea name="description" placeholder="Product Description" class="form-control  @error('description') is-invalid @enderror">{{ old('description', $product->description) }}</textarea>
+                        @error('description')
+                            <div className="invalid-feedback">
+                                <span className="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="validatedInputGroupCustomFile" >
+                            <label class="custom-file-label" for="validatedInputGroupCustomFile">Choose file...</label>
+
+                        </div>
+                        @error('image')
+                            <div className="invalid-feedback">
+                                <span className="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
             </div>
-        </div>
+            <div class="flex justify-end p-3 space-x-2">
+                <button type="submit" class="btn btn-primary">
+                    Update
+                </button>
+                <a href="{{ route('product.index') }}" class="btn btn-danger ">
+                    Cancel </a>
+            </div>
+
+        </form>
     </div>
-</x-app-layout>
+@stop
+
+@section('css')
+@stop
+
+@section('js')
+@stop

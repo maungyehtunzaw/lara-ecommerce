@@ -80,10 +80,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if($this->productRepo->softDeleteProduct($product)){
-          return redirect()->route('product.index')->with('success','Product deleted successfully');
-        }
-        return redirect()->back()->with('error','Something went wrong');
+      return $this->productRepo->softDeleteProduct($product);
     }
 
     public function forcedelete(Product $product){

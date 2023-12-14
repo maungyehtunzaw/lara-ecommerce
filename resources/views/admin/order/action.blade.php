@@ -1,15 +1,9 @@
-<div class="flex space-x-2">
+<div class="flex">
     <a href="{{ route('order.show', $id) }}" class="btn btn-sm btn-warning">
-        Show
+        <i class="fas fa-eye"></i>
     </a>
     <a href="{{ route('order.edit', $id) }}" class="btn btn-sm btn-primary">
-        Edit
+        <i class="fas fa-edit"></i>
     </a>
-    <form action="{{ route('order.destroy', $id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-primary">
-            Delete
-        </button>
-    </form>
+    <button class="btn btn-sm btn-danger" data-id="{{$id}}" id="deleteModelBtn"><i class="fas fa-trash"></i> </button>
 </div>

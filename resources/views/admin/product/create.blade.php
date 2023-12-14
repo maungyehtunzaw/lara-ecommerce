@@ -1,21 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Create Product') }}
-            </h2>
-            <a href="{{ route('product.index') }}" class="btn btn-sm btn-primary">
-                Product List
-            </a>
-        </div>
-    </x-slot>
+@extends('adminlte::page')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    CREATE PRODUCT
-                </div>
+@section('title', 'Dashboard')
+@section('content_header')
+    <h4>CREATE PRODUCT</h4>
+@stop
+
+@section('content')
+<div class="bg-white dark:bg-gray-800  p-2">
                 <form action="{{ route('product.store') }}" method="POST">
                     @csrf
 
@@ -28,46 +19,76 @@
     </ul>
 </div>
 @endif
-                    <div class="grid grid-cols-2 gap-3 p-3">
-                        <div class="cols-span-1">
-                            <div class="mb-3">
-                                <label>Product Name</label>
-                                <input type="text" name="name" placeholder="Product Name" class="input input-bordered w-full @error('name') input-error @enderror"  value="{{old('name')}}"/>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="productName">Product Name</label>
+                                <input type="text" name="name" placeholder="Product Name" class="form-control @error('name') is-invalid @enderror"  value="{{old('name')}}"/>
                                 @error('name')
-                                <div className="label">
-                                    <span className="label-text-alt text-red-600">{{$message}}</span>
+                                <div className="invalid-feedback">
+                                    {{$message}}
                                   </div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <select class="select select-bordered w-full" name="categories_id">
+                            <div class="form-group">
+                                <select name="categories_id" class="form-control @error('categories_id') is-invalid @enderror" >
                                     @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}
                                     </option>
                                 @endforeach
                                   </select>
                                   @error('categories_id')
-                                  <div className="label">
+                                  <div className="invalid-feedback">
                                       <span className="label-text-alt text-red-600">{{$message}}</span>
                                     </div>
                                   @enderror
 
                             </div>
-                            <div class="mb-3">
+                            <div class="form-group">
                                 <input type="text" name="unit_rate" placeholder="Product Price" value="{{old('unit_rate')}}"
-                                    class="input input-bordered w-full @error('unit_rate') input-error @enderror" />
+                                    class="form-control @error('unit_rate') is-invalid @enderror" />
+                                    @error('unit_rate')
+                                    <div className="invalid-feedback">
+                                        {{$message}}
+                                      </div>
+                                    @enderror
                             </div>
-                            <div class="mb-3">
+
+                            <div class="form-group">
                                 <input type="number" name="qty" placeholder="Product Quantity"
                                 value="{{old('qty')}}"
-                                class="input input-bordered w-full"  />
+                                class="form-control @error('qty') is-invalid @enderror"  />
+                                @error('qty')
+                                <div className="invalid-feedback">
+                                    {{$message}}
+                                  </div>
+                                @enderror
+
                             </div>
-                            <div class="mb-3">
-                                <textarea name="description" placeholder="Product Description"  class="textarea textarea-bordered w-full">{{old('description')}}</textarea>
+
+                            <div class="form-group">
+                                <textarea name="description" placeholder="Product Description"  class="form-control  @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                                @error('description')
+                                <div className="invalid-feedback">
+                                    {{$message}}
+                                  </div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="cols-span-1">
-                            <input type="file" class="file-input file-input-bordered" />
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Product Image</label>
+                            <div class="custom-file">
+                                <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="validatedInputGroupCustomFile">
+                                <label class="custom-file-label" for="validatedInputGroupCustomFile">Choose file...</label>
+                              </div>
+                                @error('image')
+                                <div className="invalid-feedback">
+                                    {{$message}}
+                                  </div>
+                                @enderror
+                            </div>
 
                         </div>
 
@@ -78,12 +99,19 @@
                             Create
                         </button>
                         <a href="{{ route('product.index') }}"
-                            class="btn btn-error ">
+                            class="btn btn-danger ">
                             Cancel  </a>
                     </div>
 
                 </form>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+</div>
+
+    @stop
+
+    @section('css')
+        {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    @stop
+
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop

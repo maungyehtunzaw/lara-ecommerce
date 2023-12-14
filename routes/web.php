@@ -37,6 +37,8 @@ Route::group([
     Route::resource('product', 'ProductController');
     Route::resource('category', 'CategoryController');
     Route::resource('order', 'OrderController');
+    Route::resource('user', 'UserController');
+    Route::resource('customer', 'CustomerController');
 });
 
 // That go for the front end.
