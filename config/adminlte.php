@@ -234,7 +234,7 @@ return [
 
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
+    'right_sidebar_theme' => 'light',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
@@ -291,11 +291,16 @@ return [
 
     'menu' => [
         // Navbar items:
+
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
+            'type'         => 'darkmode-widget',
+            'topnav_right' => true, // Or "topnav => true" to place on the left.
         ],
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        // ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -381,8 +386,27 @@ return [
                     'url'  => '/admin/order',
                     'icon'=>'fas fa-fw fa-list'
                 ],
-
-
+            ],
+        ],
+        [
+            'text' => 'Stock',
+            'icon'=>'fas fa-fw fa-warehouse',
+            'submenu' => [
+                [
+                    'text' => 'Stock In',
+                    'url'  => '/admin/stockin',
+                    'icon'=>'fas fa-fw fa-list'
+                ],
+                [
+                    'text' => 'Stock Out',
+                    'url'  => '/admin/stockout',
+                    'icon'=>'fas fa-fw fa-list'
+                ],
+                [
+                    'text' => 'Stock Balance',
+                    'url'  => '/admin/stockblance',
+                    'icon'=>'fas fa-fw fa-list'
+                ],
             ],
         ],
         [
@@ -394,16 +418,16 @@ return [
                 'submenu' => [
                     [
                         'text' => 'User List',
-                        'url'  => '/admin/users',
+                        'url'  => '/admin/user',
 
                     ],
                     [
                         'text' => 'User Role',
-                        'url'  => '/admin/users',
+                        'url'  => '/admin/user',
                     ],
                     [
                         'text' => 'Front Setting',
-                        'url'  => '/admin/users',
+                        'url'  => '/admin/user',
                     ],
 
                 ],

@@ -54,15 +54,21 @@ Route::group([
     Route::get('/product', 'ProductController@showProduct')->name('front.product');
     Route::get('/product/{id}', 'ProductController@showDetail')->name('front.product.show');
 
-    Route::group(['middleware' => ['auth']], function () {
-        Route::get('/logout', 'CustomerAuthController@logout')->name('front.logout');
-        Route::get('/profile', 'CustomerAuthController@profile')->name('front.profile');
-        Route::get('/cart', 'CartController@index')->name('front.cart');
-        Route::post('/cart', 'CartController@store')->name('front.cart.store');
+    Route::post('/addtocart', 'CartController@saveToCart')->name('front.cart.addtocart');
+    Route::post('/removefromcart', 'CartController@removeFromCart')->name('front.cart.removefromcart');
+    Route::get('/order/cart', 'CartController@index')->name('front.cart');
+    Route::get('/order/payment','CartController@payment')->name('front.payment');
+    Route::post('/savepayment','CartController@savePayment')->name('front.pay');
+    Route::get('/order/success','OrderController@checkoutSuccess')->name('checkout.success');
 
-        Route::post('/addtocart', 'CartController@update')->name('front.cart.addtocart');
 
-        Route::get('/orders', 'OrderController@index')->name('front.orders');
+    Route::group(['middleware' => ['auth:cus']], function () {
+        Route::post('/customer/logout', 'CustomerAuthController@logout')->name('customer.logout');
+
+        Route::get('/account/profile', 'CustomerAuthController@showProfile')->name('front.profile');
+
+
+        Route::get('/orders', 'OrderController@showOrders')->name('front.orders');
         Route::get('/orders/{id}', 'OrderController@show')->name('front.orders.show');
 
     });

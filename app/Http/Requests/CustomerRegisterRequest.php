@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class CustomerRegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; //control from middleware
+        return true;
     }
 
     /**
@@ -22,12 +22,10 @@ class CustomerRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:e_customers,email',
             'password' => 'required|string|min:6',
-            'phone'=>'required|string|min:11|max:11',
-            'first_name'=>'required|string|min:3|max:255',
-            'last_name'=>'required|string|min:3|max:255',
+            'phone'=>'nullable|string|min:6|max:11',
 
         ];
     }

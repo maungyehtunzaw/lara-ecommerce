@@ -172,6 +172,8 @@ return [
         App\Providers\RepositoryServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
+        App\Providers\ViewServiceProvider::class, //custom
+
 
     ])->toArray(),
 

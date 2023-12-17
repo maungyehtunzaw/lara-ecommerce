@@ -11,16 +11,16 @@ class ProductRepository implements ProductInterface
 {
 
 
-    public function createProduct($data) : bool
+    public function createProduct($req) : bool
     {
         DB::beginTransaction();
       try{
         $product = new Product();
-        $product->name = $data['name'];
-        $product->unit_rate = $data['unit_rate'];
-        $product->description = $data['description'];
+        $product->name = $req->name;
+        $product->unit_rate = $req->unit_rate;
+        $product->description = $req->description;
         // $product->qty = $data['qty'];
-        $product->categories_id = $data['categories_id'];
+        $product->categories_id = $req->categories_id;
         $product->save();
         DB::commit();
         return true;

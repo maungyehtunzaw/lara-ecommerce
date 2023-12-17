@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\AdminUser;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,14 +22,14 @@ class AdminUserDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'adminuser.action')
+            ->addColumn('action', 'admin.user.action')
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(AdminUser $model): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -68,7 +68,9 @@ class AdminUserDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name'),
+            Column::make('email'),
+            Column::make('email_verified_at'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];

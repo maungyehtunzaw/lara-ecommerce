@@ -21,23 +21,41 @@ class OrderDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $paymentStatus = ['1'=>'Paid','0'=>'Unpaid'];
+        $paymentMethod = ['1'=>'Visa','2'=>'MobilePay','3'=>'Bank Transfer','4'=>'COD'];
+        $deliveryStatus = ['1'=>'Pending','2'=>'Processing','3'=>'Delivered','4'=>'Cancelled'];
         return (new EloquentDataTable($query))
             ->addColumn('action', 'admin.order.action')
             ->editColumn('customer',function($query){
-                return $query->customer->first_name;
+                return $query->customer->name;
             })
-            ->editColumn('payment_status',function($query){
-                return $query->payment_status==1 ? 'Paid' : 'Unpaid';
+            ->editColumn('payment_status',function($query) use($paymentStatus){
+                // if(in_array($query->payment_status,$paymentStatus)){
+                //     return $paymentStatus[$query->payment_status];
+                // }else{
+                //     return 'Unpaid';
+                // }
+               return $query->payment_status == 1 ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger">Unpaid</span>';            })
+            ->editColumn('payment_method',function($query) use($paymentMethod){
+                if(array_key_exists($query->payments_id,$paymentMethod)){
+                    return $paymentMethod[$query->payments_id];
+                }else{
+                    return 'COD';
+                }
             })
-            ->editColumn('payment_method',function($query){
-                return $query->payment_method==1 ? 'Cash On Delivery' : 'Online Payment';
-            })
-            ->editColumn('shipping_status',function($query){
-                return "OK";
+            ->editColumn('shipping_status',function($query) use($deliveryStatus){
+                if(in_array($query->delivery_status,$deliveryStatus)){
+                    return $deliveryStatus[$query->delivery_status];
+                }else{
+                    return 'Pending';
+                }
+
             })
             ->editColumn('created_at',function($query){
-                return $query->created_at->format('d-m-Y H:i');
+                // return $query->created_at->format('d-m-Y H:i');
+                return $query->created_at->diffForHumans();
             })
+            ->rawColumns(['action','payment_status','shipping_status'])
             ->setRowId('id');
     }
 
@@ -81,7 +99,7 @@ class OrderDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(120)
-                  ->addClass('text-center'),
+                  ->addClass('text-center align-middle'),
             Column::make('id'),
             Column::make('saleno'),
             Column::make('customer'),
@@ -90,7 +108,7 @@ class OrderDataTable extends DataTable
             Column::make('shipping_status'),
             Column::make('payment_status'),
             Column::make('payment_method'),
-            Column::make('created_at'),
+            Column::make('created_at')->title('Created'),
         ];
     }
 

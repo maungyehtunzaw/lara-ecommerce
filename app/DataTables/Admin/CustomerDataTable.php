@@ -23,11 +23,14 @@ class CustomerDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'admin.customer.action')
-            ->editColumn('name',function($query){
-                return $query->first_name.' '.$query->last_name;
-            })
+            // ->editColumn('name',function($query){
+            //     return  //$query->first_name.' '.$query->last_name;
+            // })
             ->editColumn('created_at',function($query){
-                return $query->created_at->diffForHumans();
+                return $query->created_at->format('Y-m-d H:i A');
+            })
+            ->editColumn('updated_at',function($query){
+                return $query->updated_at->diffForHumans();
             })
             ->setRowId('id');
     }

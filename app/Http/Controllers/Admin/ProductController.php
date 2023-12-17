@@ -38,9 +38,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $req)
     {
-       if($this->productRepo->createProduct($request->validated())){
+       if($this->productRepo->createProduct($req)){
          return redirect()->route('product.index')->with('success','Product created successfully');
        }
        return redirect()->back()->with('error','Something went wrong');

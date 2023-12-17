@@ -18,14 +18,15 @@ class CustomerFactory extends Factory
     {
         return [
             'username' =>fake()->userName(),
+            'name'=>fake()->name(),
             'first_name'=> fake()->firstName(),
             'last_name'=> fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'password' => bcrypt('password'), // password
             'address' => fake()->address(),
-            'created_by' => fake()->numberBetween(1, 10),
-            'updated_by' => fake()->numberBetween(1, 10),
+            'created_by' => fake()->numberBetween(1, 3),
+            'updated_by' => fake()->numberBetween(1, 3),
         ];
     }
 }

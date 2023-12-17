@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="bg-white dark:bg-gray-800  p-2">
-                <form action="{{ route('product.store') }}" method="POST">
+                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
 @if ($errors->any())

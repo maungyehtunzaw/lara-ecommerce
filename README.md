@@ -37,3 +37,13 @@ Develop a e-commerce web
     - Controller (Connect Repository(Data) => View Blade)
     - View (Blade View)
 
+
+# Front-Site Pages & 
+
+    1- Home Page
+    2- Product Listing
+    3- Cart Page
+    4- Checkout Page
+    5- Profile Page
+    6- Order History
+    7-   
