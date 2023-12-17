@@ -7,6 +7,8 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 class OrderController extends Controller
 {
     /**
@@ -15,6 +17,15 @@ class OrderController extends Controller
     public function index(OrderDataTable $orderDataTable)
     {
         return $orderDataTable->render('admin.order.index');
+    }
+
+    public function confirm(Request $req){
+        $order = Order::find($req->order_id);
+        $order->update([
+            'delivery_status' => $req->delivery_status,
+            'paid_status' => $req->paid_status
+        ]);
+        return redirect()->back()->with('success','Order Confirmed');
     }
 
 

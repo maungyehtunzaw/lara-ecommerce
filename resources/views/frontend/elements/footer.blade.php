@@ -11,13 +11,13 @@
         <div class="col-lg-8 col-md-12">
             <div class="row">
                 <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                    <h5 class="text-secondary text-uppercase mb-4">Service</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Blogs</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQs</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shipping & Delivery</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Term & Conditions</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy</a>
                         <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                     </div>
                 </div>

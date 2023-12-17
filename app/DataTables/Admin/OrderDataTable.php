@@ -21,7 +21,7 @@ class OrderDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $paymentStatus = ['1'=>'Paid','0'=>'Unpaid'];
+        $paymentStatus = ['1'=>'Paid','2'=>'Pending'];
         $paymentMethod = ['1'=>'Visa','2'=>'MobilePay','3'=>'Bank Transfer','4'=>'COD'];
         $deliveryStatus = ['1'=>'Pending','2'=>'Processing','3'=>'Delivered','4'=>'Cancelled'];
         return (new EloquentDataTable($query))
@@ -35,7 +35,7 @@ class OrderDataTable extends DataTable
                 // }else{
                 //     return 'Unpaid';
                 // }
-               return $query->payment_status == 1 ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger">Unpaid</span>';            })
+               return $query->payment_status == 1 ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger">Pending</span>';            })
             ->editColumn('payment_method',function($query) use($paymentMethod){
                 if(array_key_exists($query->payments_id,$paymentMethod)){
                     return $paymentMethod[$query->payments_id];

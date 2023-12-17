@@ -44,8 +44,8 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Template Javascript -->
-    <script src="/frontend/js/main.js"></script>
-
+    <script src="/frontend/js/main.js" type="text/javascript"></script>
+    @stack('scripts')
 </body>
 
 </html>

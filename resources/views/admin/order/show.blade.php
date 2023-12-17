@@ -78,6 +78,39 @@
                                 <label class="form-label col-6 col-sm-5">Total Amount:</label>
                                 <span><strong>{{ $order->total_amount }} MMK</strong></span>
                             </div>
+                            <div class="col-12">
+                                <label class="form-label col-6 col-sm-5">Paid</label>
+                                <span><strong>
+                                        @if($order->paid_status ==1)
+                                      <span class='badge badge-success'>PAID</span>
+                                        @else
+                                      <span class='badge badge-warning'>PENDING</span>
+                                        @endif
+                                    </strong></span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label col-6 col-sm-5">Delivery</label>
+                                <span><strong>
+                                       @switch($order->delivery_status)
+                                           @case(1)
+                                                  <span class='badge badge-warning'>PENDING</span>
+                                               @break
+                                           @case(2)
+                                                    <span class='badge badge-info'>PROCESSING</span>
+                                               @break
+                                             @case(3)
+                                                     <span class='badge badge-success'>COMPLETED</span>
+                                                  @break
+                                                @case(4)
+                                                        <span class='badge badge-danger'>CANCELLED</span>
+                                                        @break
+                                             @default
+
+
+
+                                       @endswitch
+                                    </strong></span>
+                            </div>
 
                         </div>
                     </div>
@@ -89,6 +122,7 @@
                         <h6 class="mb-0 fw-bold ">Delivery Address</h6>
                         <a href="#" class="text-muted">Edit</a>
                     </div>
+                    @if($order->address)
                     <div class="card-body">
                         <div class="row g-1">
                             <div class="col-12">
@@ -109,6 +143,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -135,34 +170,37 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Total</td>
+                            <td>{{ $order->total_amount }}</td>
+                        </tr>
                 </table>
 
             </div>
             <div class="col-md-4">
                 <div class="card p-2">
-                    <form action="" method="POST">
-                        <div class="form-group">
-                            <label for="total">Total</label>
-                            <input type="text" name="total" id="total" class="form-control"
-                                value="{{ $order->total }}" readonly>
-                        </div>
-                        {{-- <div class="form-group">
-                            <label for="discount">Order Status</label>
-                            <select class="form-control">
-                                <option value="pending">Pending</option>
-                                <option value="processing">Processing</option>
-                                <option value="completed">Completed</option>
-                                <option value="cancelled">Cancelled</option>
-                            </select>
-                        </div> --}}
+                    <form action="{{route('order.confirm')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="order_id" value="{{$order->id}}">
 
                         <div class="form-group">
-                            <label for="discount">Delivery Status</label>
-                            <select class="form-control">
-                                <option value="pending">Pending</option>
-                                <option value="processing">Processing</option>
-                                <option value="completed">Completed</option>
-                                <option value="cancelled">Cancelled</option>
+                            <label for="paid_status">Payment Status {{$order->paid_status}}</label>
+
+
+                            <select name="paid_status" class="form-control">
+                                <option value="2" @if($order->paid_status ==2) selected @endif>Pending</option>
+                                <option value="1" @if($order->paid_stutus ==1) selected @endif>Confirm</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery_status">Delivery Status</label>
+                            <select name="delivery_status" class="form-control" id="delivery_status">
+                                <option value="1" @if($order->delivery_status ==1) selected @endif>Pending</option>
+                                <option value="2" @if($order->delivery_status ==2) selected @endif>Processing</option>
+                                <option value="3" @if($order->delivery_status ==3) selected @endif>Completed</option>
+                                <option value="4" @if($order->delivery_status ==4) selected @endif>Cancelled</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Order</button>

@@ -11,9 +11,8 @@
         <div class="bg-white dark:bg-gray-800  p-2">
             {{ $dataTable->table() }}
         </div>
-        <x-adminlte-modal id="modalMin" title="Minimal"/>
 {{-- Example button to open modal --}}
-<x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalMin"/>
+
         <x-adminlte-modal id="deleteModel" title="Are your sure?" theme="red" icon="fas fa-exclamation-triangle"
         size='md' v-centered>
         if your are sure to delete, press ok else cancel..
@@ -49,11 +48,13 @@
 
 
         $('body').on('click', '#confirmDelete', function() {
+            // alert("confirm delete");
             var delId = $(this).val();
+            console.log(delId);
             var url = '{{ route('product.destroy', ':id') }}';
             url = url.replace(':id', delId);
             // alert(url);
-            $('#deleteModel').modal('hide');
+            // $('#deleteModel').modal('hide');
             $.ajax({
                 type: "DELETE",
                 url: url,

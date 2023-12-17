@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function showOrders(){
         $id = auth()->guard('cus')->user()->id;
-        $orders = Order::where('customers_id',$id)->get();
+        $orders = Order::where('customers_id',$id)->latest()->paginate(10);
         // $orders = $customer->load('orders');
 
 

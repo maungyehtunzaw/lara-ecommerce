@@ -132,7 +132,7 @@
                 console.log(data);
                 if (data.success === true) {
                     let totalQty = parseInt(cartTotalQty) + parseInt(qty);
-                    $('div#cartQty').each(function(){
+                    $('span#cartQty').each(function(){
                         console.log("hereistotalqty now"+totalQty);
                         $(this).text(totalQty);
                     });
@@ -156,6 +156,7 @@
         console.log("remove from cart");
         var _token = $('meta[name="csrf-token"]').attr('content');
         var product_id = $(this).data('id');
+        var cartTotalQty = $('#cartQty').text();
         var url = '/removefromcart'
         $.ajax({
           headers: {
@@ -170,7 +171,10 @@
                 console.log('success');
                 console.log(data);
                 if (data.success === true) {
-                    //remove the row
+                    let totalQty = parseInt(cartTotalQty) - parseInt(data.qty);
+                    $('span#cartQty').each(function(){
+                        $(this).text(totalQty);
+                    });
                     $('#cartRow_'+data.product_id).remove();
                     Toastify({
                         text: data.message,
@@ -179,6 +183,8 @@
                           background: "linear-gradient(to right, #00b09b, #96c93d)",
                         }
                       }).showToast();
+                      calculateSubTotal();
+
                 }
             },
             error: function (err) {
@@ -212,6 +218,17 @@
                 }
             }
         });
+    }
+
+    function calculateSubTotal() {
+        console.log("calculateSubTotal");
+       var total = 0;
+        $("td#totalAmt").each(function() {
+            console.log($(this).text());
+            total += parseInt($(this).text());
+        });
+        $("#cartTotalAmount").text(total);
+
     }
 
 })(jQuery);

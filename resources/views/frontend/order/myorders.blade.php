@@ -32,18 +32,31 @@
                                 <td>{{$order->total_qty}}</td>
                                 <td>{{$order->total_amount}}</td>
                                 <td>
-                                    @if ($order->paid)
+                                    @if ($order->paid_status==1)
                                         <span class="badge badge-success">Paid</span>
                                     @else
                                         <span class="badge badge-danger">Unpaid</span>
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($order->delivered)
+                                  @switch($order->delivery_status)
+                                    @case(1)
+                                        <span class="badge badge-warning">Pending</span>
+                                        @break
+                                    @case(2)
+                                        <span class="badge badge-info">Processing</span>
+                                        @break
+                                    @case(3)
                                         <span class="badge badge-success">Delivered</span>
-                                    @else
-                                        <span class="badge badge-danger">Undelivered</span>
-                                    @endif
+                                        @break
+                                    @case(4)
+                                        <span class="badge badge-danger">Cancelled</span>
+                                        @break
+                                    @default
+                                    <span class="badge badge-warning">Pending</span>
+                                    @break
+
+                                  @endswitch
                                 </td>
                                 <td>
                                     <a href="{{route('front.orders.show',$order->id)}}" class="btn btn-sm btn-primary">Detail</a>
@@ -52,6 +65,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$orders->links()}}
 
                 </div>
             </div>

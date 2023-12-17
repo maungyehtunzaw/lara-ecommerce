@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,12 +18,13 @@ class ProductController extends Controller
         if($category!=''){
             $query->where('categories_id',$category);
         }
-        // if($search!=''){
-        //     $query->where('');
-        // }
+        if($search!=''){
+            $query->where('name','like','%'.$search.'%');
+        }
         $products = $query->paginate(12);
+        $categories = Category::all();
 
-        return view('frontend.product.index',compact('products'));
+        return view('frontend.product.index',compact('products','categories'));
     }
     public function showDetail(int $id)
     {

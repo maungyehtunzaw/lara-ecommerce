@@ -34,6 +34,8 @@ Route::group([
     'middleware' => ['auth'],
 ], function () {
 
+    Route::post('/orderconfirm','OrderController@confirm')->name('order.confirm');
+
     Route::resource('product', 'ProductController');
     Route::resource('category', 'CategoryController');
     Route::resource('order', 'OrderController');

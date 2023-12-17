@@ -6,9 +6,10 @@
     <div class="row px-xl-5 my-2">
         <div class="col-md-4">
             <select name="category" class="form-control">
-                <option value="">Choose Category</option>
-                <option value="1">Abc beer</option>
-                <option value="2">BBC S</option>
+                <option value="">Choose Category{{request('category')}}</option>
+                @foreach($categories as $cat)
+                    <option value="{{$cat->id}}" @if(request('category')==$cat->id) selected @endif>{{$cat->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-md-5">
@@ -21,6 +22,16 @@
 </form>
 
     <div class="row px-xl-5">
+        <div class="col-md-12">
+        @if(count($products)===0)
+            <div class="card" style="width:100%">
+                <div class="card-body">
+                <h3 class="text-center">No Products Found, Redefin your search</h3>
+            </div>
+            </div>
+
+        @endif
+        </div>
 
         @foreach($products as $p)
         <div class="col-lg-3 col-md-4 col-md-6 col-sm-6 pb-1">

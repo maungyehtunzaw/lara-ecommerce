@@ -12,7 +12,7 @@ class Order extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table='e_orders';
-
+    protected $guarded = [];
     public function customer() : HasOne
     {
         return $this->hasOne(Customer::class,"id","customers_id");

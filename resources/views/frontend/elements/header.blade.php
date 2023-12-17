@@ -53,7 +53,7 @@
                 </a> --}}
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-shopping-cart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;"><div id="cartQty">{{$total_qty}}</div> QTY</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;"><span id="cartQty">{{$total_qty}}</span> QTY</span>
                 </a>
             </div>
         </div>
@@ -61,7 +61,7 @@
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
             <a href="{{route('front.home')}}" class="text-decoration-none">
-                <span class="h1 text-uppercase text-primary bg-dark px-2">Z&T</span>
+                <span class="h1 text-uppercase text-primary bg-dark px-2">ZAT</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Store</span>
             </a>
         </div>
@@ -113,8 +113,8 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
-                    <span class="h1 text-uppercase text-dark bg-light px-2">Z&STORE</span>
-                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                    <span class="h1 text-uppercase text-dark bg-light px-2">ZAT</span>
+                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">STORE</span>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -135,8 +135,8 @@
 
                             </div>
                         </div>
-                        <a href="{{route('front.cart')}}" class="nav-item nav-link">Cart</a>
-                        <a href="{{route('front.payment')}}" class="nav-item nav-link">Payment</a>
+                        {{-- <a href="{{route('front.cart')}}" class="nav-item nav-link">Cart</a>
+                        <a href="{{route('front.payment')}}" class="nav-item nav-link">Payment</a> --}}
                         <a href="{{route('front.profile')}}" class="nav-item nav-link">My Account</a>
 
 
@@ -149,7 +149,7 @@
                         <a href="{{route('front.cart')}}" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i> Cart
                             <span class="badge text-secondary border border-secondary rounded-md" style="padding-bottom: 2px;">
-                                <div id="cartQty">{{$total_qty}}</div> QTY </span>
+                                <span id="cartQty">{{$total_qty}}</span> QTY </span>
                         </a>
                     </div>
                 </div>

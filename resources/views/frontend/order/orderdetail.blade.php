@@ -22,6 +22,7 @@
                                 <th>Amount</th>
                             </thead>
                             <tbody>
+                                <?php $totalAmount = 0; ?>
                                 @foreach ($order->order_items as $od)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
@@ -32,12 +33,13 @@
                                     <td>{{$od->unit_rate}}</td>
                                     <td>{{$od->total_amount}}</td>
                                 </tr>
+                                <?php $totalAmount += $od->total_amount; ?>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="5" class="text-right">Total Amount</td>
-                                    <td>{{$order->total_amount}}</td>
+                                    <td>{{$totalAmount}}</td>
                                 </tr>
                             </tfoot>
                         </table>

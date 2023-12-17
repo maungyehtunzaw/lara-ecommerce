@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Interfaces\Admin\ProductInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-
+use Intervention\Image\Facades\Image;
 class ProductRepository implements ProductInterface
 {
 
@@ -55,7 +55,8 @@ class ProductRepository implements ProductInterface
     private function uploadImage($image)
     {
         $imageName = time().'.'.$image->extension();
-        $image->move(public_path('images'), $imageName);
+        $image->move(public_path('upload/products/'), $imageName);
+        Image::make($image)->resize(400, 300)->save();
         return $imageName;
     }
     public function softDeleteProduct($product): Response{

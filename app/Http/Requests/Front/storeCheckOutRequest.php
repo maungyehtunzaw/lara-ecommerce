@@ -34,7 +34,9 @@ class storeCheckOutRequest extends FormRequest
 
             ];
         }
-        return [];
+        return [
+            'payments_id'=>'required',
+        ];
 
     }
     public function messages(): array
