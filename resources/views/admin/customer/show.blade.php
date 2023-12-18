@@ -59,9 +59,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @empty($recentOrders)
+                        @if($recentOrders->count()==0)
                             <tr>
-                                <td colspan="10" class="text-center">No Order Found</td>
+                                <td colspan="8" class="text-center">No Order Found</td>
                             </tr>
                         @else
                             @foreach ($recentOrders as $order)
@@ -104,7 +104,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        @endempty
+                        @endif
                     </tbody>
                 </table>
             </div>

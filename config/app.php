@@ -173,6 +173,8 @@ return [
 
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\ViewServiceProvider::class, //custom
+        // Intervention\Image\ImageServiceProvider::class
+
 
 
     ])->toArray(),
@@ -192,6 +194,8 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        // 'Image' => Intervention\Image\Facades\Image::class
+
     ])->toArray(),
 
 ];

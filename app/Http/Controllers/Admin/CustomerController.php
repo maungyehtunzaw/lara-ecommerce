@@ -41,7 +41,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $customer->load('addresses');
-        $recentOrders = Order::latest()->take(5)->get();
+        $recentOrders = Order::where(['customers_id'=>$customer->id])->latest()->take(5)->get();
         return view('admin.customer.show', compact('customer','recentOrders'));
     }
 

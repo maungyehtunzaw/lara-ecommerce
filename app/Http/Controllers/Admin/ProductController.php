@@ -40,6 +40,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $req)
     {
+        // dd($req->all());
        if($this->productRepo->createProduct($req)){
          return redirect()->route('product.index')->with('success','Product created successfully');
        }

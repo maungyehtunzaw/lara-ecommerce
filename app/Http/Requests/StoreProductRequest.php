@@ -26,6 +26,7 @@ class StoreProductRequest extends FormRequest
             'unit_rate' => 'required|numeric',
             'description' => 'nullable|string|min:3|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gallery' => 'nullable',
             'qty'=>'required|numeric',
             'categories_id'=>'required|numeric',
         ];
