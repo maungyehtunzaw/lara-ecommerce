@@ -10,7 +10,7 @@ interface ProductInterface
 {
     public function createProduct(Request $data): bool;
     public function updateProduct(int $productId, array $data): bool;
-    public function softDeleteProduct(Product $product): Response;
+    public function softDeleteProduct($id);
     public function forceDeleteProduct(Product $product): Response;
 
     // public function updateProduct(int $productId, array $data): bool;

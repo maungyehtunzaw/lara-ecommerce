@@ -64,7 +64,7 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model): QueryBuilder
     {
-        return $model->newQuery()->with('customer:id,first_name');
+        return $model->newQuery()->with('customer:id,first_name,name');
     }
 
     /**

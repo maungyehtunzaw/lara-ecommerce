@@ -7,7 +7,6 @@
 
 @section('plugins.Sweetalert2', true)
 @section('content')
-
         <div class="bg-white dark:bg-gray-800  p-2">
             {{ $dataTable->table() }}
         </div>
@@ -54,7 +53,7 @@
             var url = '{{ route('product.destroy', ':id') }}';
             url = url.replace(':id', delId);
             // alert(url);
-            // $('#deleteModel').modal('hide');
+             $('#deleteModel').modal('hide');
             $.ajax({
                 type: "DELETE",
                 url: url,

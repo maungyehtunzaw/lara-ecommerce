@@ -78,9 +78,14 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-      return $this->productRepo->softDeleteProduct($product);
+        // return response()->json([
+        //     'success'=>true,
+        //     'status'=>'success',
+        //     'message'=>'Product Deleted Successful #'.$id
+        // ]);
+       return $this->productRepo->softDeleteProduct($id);
     }
 
     public function forcedelete(Product $product){

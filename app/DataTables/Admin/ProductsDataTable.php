@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Carbon;
 class ProductsDataTable extends DataTable
@@ -27,8 +25,10 @@ class ProductsDataTable extends DataTable
                 return $query->category->name;
             })
             ->editColumn('created_at',function($query){
-                // return $query->created_at->format('d-m-Y H:i');
                 return $query->created_at->diffForHumans();
+            })
+            ->setRowClass(function ($param) {
+                return 'row_' . $param->id;
             })
             ->editColumn('updated_at',function($query){
                 return $query->updated_at->diffForHumans();

@@ -59,8 +59,8 @@ class ProductRepository implements ProductInterface
         Image::make($image)->resize(400, 300)->save();
         return $imageName;
     }
-    public function softDeleteProduct($product): Response{
-
+    public function softDeleteProduct($id){
+        $product = Product::find($id);
         if( $product->delete()){
 
             return response()->json([
