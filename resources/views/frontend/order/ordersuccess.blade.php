@@ -1,4 +1,5 @@
 @extends('layouts.frontend')
+@section('title','Order Success')
 @section('content')
     <!-- Cart Start -->
     <div class="container-fluid">

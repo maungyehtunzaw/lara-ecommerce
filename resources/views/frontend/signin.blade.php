@@ -1,4 +1,5 @@
 @extends('layouts.frontend')
+@section('title', 'Sign In')
 @section('content')
     <div class="d-flex justify-content-center align-items-center rounded-sm">
         <div class="card " style="width: 20rem">
@@ -37,7 +38,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Sign in</button>
-                    <a href="{{ route('front.register') }}" class="btn btn-link">Sign up</a>
+                    <a href="{{ route('front.register') }}" class="btn btn-link">No Account? Sign up</a>
 
                 </form>
             </div>

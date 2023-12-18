@@ -1,4 +1,5 @@
 @extends('layouts.frontend')
+@section('title', 'Payment')
 @section('content')
     <div class="container-fluid">
 

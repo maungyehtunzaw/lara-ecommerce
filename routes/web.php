@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,7 +33,7 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth'],
 ], function () {
-
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::post('/orderconfirm','OrderController@confirm')->name('order.confirm');
 
     Route::resource('product', 'ProductController');
@@ -68,7 +68,7 @@ Route::group([
         Route::post('/customer/logout', 'CustomerAuthController@logout')->name('customer.logout');
 
         Route::get('/account/profile', 'CustomerAuthController@showProfile')->name('front.profile');
-
+        Route::get('/account/address', 'CustomerAuthController@showAddress')->name('front.address');
 
         Route::get('/orders', 'OrderController@showOrders')->name('front.orders');
         Route::get('/orders/{id}', 'OrderController@show')->name('front.orders.show');

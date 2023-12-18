@@ -1,4 +1,5 @@
 @extends('layouts.frontend')
+@section('title','Order Detail')
 @section('content')
     <div class="container-fluid">
         <div class="row px-xl-5">

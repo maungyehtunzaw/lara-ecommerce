@@ -1,15 +1,16 @@
 <div class="card">
     <div class="card-header">My Account</div>
     <div class="card-body">
-        <ul class="nav flex-column">
+        <ul class="nav nav-pills flex-column">
+
             <li class="nav-item">
-                <a href="{{route('front.profile')}}" class="nav-link">Profile</a>
+                <a href="{{route('front.profile')}}" class="nav-link @if(request()->routeIs('front.profile')) active @endif">Profile</a>
             </li>
             <li class="nav-item">
-                <a href="{{route('front.orders')}}" class="nav-link">Orders</a>
+                <a href="{{route('front.orders')}}" class="nav-link @if(request()->routeIs('front.orders')) active @endif">Orders</a>
             </li>
             <li class="nav-item">
-                <a href="{{route('front.profile')}}" class="nav-link">Address</a>
+                <a href="{{route('front.address')}}" class="nav-link @if(request()->routeIs('front.address')) active @endif">Address</a>
             </li>
             <li class="nav-item">
                 <a href="{{route('front.profile')}}" class="nav-link">Password</a>

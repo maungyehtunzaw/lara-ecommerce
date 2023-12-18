@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerLoginRequest;
 use App\Http\Requests\CustomerRegisterRequest;
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -19,6 +20,11 @@ class CustomerAuthController extends Controller
     }
     public function showRegister(){
         return view('frontend.signup');
+    }
+    public function showAddress(){
+        $customer = auth()->guard('cus')->user()->id;
+        $addresses = Address::where('customers_id',$customer)->get();
+        return view('frontend.customer.address',compact('addresses'));
     }
 
     public function showProfile(){
