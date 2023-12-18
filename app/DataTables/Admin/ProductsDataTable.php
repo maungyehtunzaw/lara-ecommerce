@@ -27,6 +27,9 @@ class ProductsDataTable extends DataTable
             ->editColumn('created_at',function($query){
                 return $query->created_at->diffForHumans();
             })
+            ->filterColumn('category', function ($query, $keyword) {
+                $query->whereHas('category', fn($q) => $q->where('name', 'like', '%' . $keyword . '%'));
+            })
             ->setRowClass(function ($param) {
                 return 'row_' . $param->id;
             })

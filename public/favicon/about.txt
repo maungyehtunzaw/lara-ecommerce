@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Ruslan Display
+- Font Author: http://scripts.sil.org/OFL
+- Font Source: http://fonts.gstatic.com/s/ruslandisplay/v25/Gw6jwczl81XcIZuckK_e3UpfdzxrldyFvm1n.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

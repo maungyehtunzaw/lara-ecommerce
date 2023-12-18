@@ -7,6 +7,8 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+
 class CustomerController extends Controller
 {
     /**
@@ -38,7 +40,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('admin.customer.show', compact('customer'));
+        $customer->load('addresses');
+        $recentOrders = Order::latest()->take(5)->get();
+        return view('admin.customer.show', compact('customer','recentOrders'));
     }
 
     /**

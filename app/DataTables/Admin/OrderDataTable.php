@@ -29,6 +29,9 @@ class OrderDataTable extends DataTable
             ->editColumn('customer',function($query){
                 return $query->customer->name;
             })
+            ->filterColumn('customer', function ($query, $keyword) {
+                $query->whereHas('customer', fn($q) => $q->where('name', 'like', '%' . $keyword . '%'));
+            })
             ->editColumn('payment_status',function($query) use($paymentStatus){
                 // if(in_array($query->payment_status,$paymentStatus)){
                 //     return $paymentStatus[$query->payment_status];
