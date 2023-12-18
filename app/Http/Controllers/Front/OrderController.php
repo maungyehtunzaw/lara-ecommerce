@@ -18,7 +18,7 @@ class OrderController extends Controller
     }
     public function show($id){
         $customer = auth()->guard('cus')->user();
-        $order = Order::with('order_items')->where(['customers_id'=>$customer->id,'id'=>$id])->first();
+        $order = Order::with('order_items')->where(['customers_id'=>$customer->id,'id'=>$id])->firstOrFail();
         return view('frontend.order.orderdetail',compact('order'));
     }
     public function checkoutSuccess(){

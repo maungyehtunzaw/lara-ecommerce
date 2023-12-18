@@ -16,6 +16,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         @auth('cus')
                         <a href="{{route('front.profile')}}" class="dropdown-item" type="button">Profile</a>
+                        <a href="{{route('front.orders')}}" class="dropdown-item" type="button">Orders</a>
                         <form action="{{route('customer.logout')}}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item" type="button">Logout</button>
@@ -137,7 +138,14 @@
                         </div>
                         {{-- <a href="{{route('front.cart')}}" class="nav-item nav-link">Cart</a>
                         <a href="{{route('front.payment')}}" class="nav-item nav-link">Payment</a> --}}
-                        <a href="{{route('front.profile')}}" class="nav-item nav-link">My Account</a>
+
+                        <a href="{{route('front.profile')}}" class="nav-item nav-link">
+                           @auth('cus')
+                            {{auth('cus')->user()->name}}
+                            @else
+                            My Account
+                            @endauth
+                        </a>
 
 
                     </div>

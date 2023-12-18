@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $new_arrivals = Product::orderBy('created_at', 'desc')->take(8)->get();
+        $new_arrivals = Product::take(8)->latest()->get();
         $recommended = Product::where('is_recommend', true)->take(8)->get();
         $categories = Category::withCount('product')->take(12)->get(); // get category with most
         $feature_categories = Category::where('is_feature',1)->take(3)->get();

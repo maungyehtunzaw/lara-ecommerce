@@ -158,7 +158,7 @@
                                 @endif
                             @endauth
 
-                            @guest
+                            @guest('cus')
                                 <div class="col-md-12 form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input name="deli_id" type="raido" checked class="custom-control-input"
