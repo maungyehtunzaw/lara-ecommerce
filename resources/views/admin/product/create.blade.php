@@ -33,6 +33,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="productName">Product Category</label>
                         <select name="categories_id" class="form-control @error('categories_id') is-invalid @enderror">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}
@@ -47,6 +48,7 @@
 
                     </div>
                     <div class="form-group">
+                        <label for="productName">Product Price(1XUnit)</label>
                         <input type="text" name="unit_rate" placeholder="Product Price" value="{{ old('unit_rate') }}"
                             class="form-control @error('unit_rate') is-invalid @enderror" />
                         @error('unit_rate')
@@ -57,6 +59,7 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="productName">Product Initial Quantity</label>
                         <input type="number" name="qty" placeholder="Product Quantity" value="{{ old('qty') }}"
                             class="form-control @error('qty') is-invalid @enderror" />
                         @error('qty')
@@ -68,6 +71,7 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="productName">Product Description</label>
                         <textarea name="description" placeholder="Product Description"
                             class="form-control  @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                         @error('description')

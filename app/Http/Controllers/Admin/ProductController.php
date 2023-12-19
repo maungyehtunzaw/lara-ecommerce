@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Admin\ProductInterface;
 use App\Models\Category;
+use App\Models\OrderItem;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.product.show', compact('product'));
+        $product->load('category','images');
+        $data['total_order'] = OrderItem::where('products_id',$product->id)->count();
+        $data['total_qty'] = OrderItem::where('products_id',$product->id)->sum('qty');
+        $data['total_amount'] = OrderItem::where('products_id',$product->id)->sum('total_amount');
+        $recent_orders = OrderItem::with('order','order.customer')->where('products_id',$product->id)->latest()->take(5)->get();
+        return view('admin.product.show', compact('product','data','recent_orders'));
     }
 
     /**
