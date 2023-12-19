@@ -38,7 +38,7 @@ class OrderDataTable extends DataTable
                 // }else{
                 //     return 'Unpaid';
                 // }
-               return $query->payment_status == 1 ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger">Pending</span>';            })
+               return $query->paid_status == 1 ? '<span class="badge badge-success">Paid</span>' : '<span class="badge badge-danger">Pending</span>';            })
             ->editColumn('payment_method',function($query) use($paymentMethod){
                 if(array_key_exists($query->payments_id,$paymentMethod)){
                     return $paymentMethod[$query->payments_id];
@@ -47,10 +47,12 @@ class OrderDataTable extends DataTable
                 }
             })
             ->editColumn('shipping_status',function($query) use($deliveryStatus){
-                if(in_array($query->delivery_status,$deliveryStatus)){
-                    return $deliveryStatus[$query->delivery_status];
-                }else{
-                    return 'Pending';
+                switch($query->delivery_status){
+                    case(1): return "<span class='badge badge-warning'>PENDING</span>";
+                    case(2): return "<span class='badge badge-info'>PROCESSING</span>";
+                    case(3): return "<span class='badge badge-success'>DELIVERED</span>";
+                    case(4): return "<span class='badge badge-danger'>CANCELLED</span>";
+                    default: return "<span class='badge badge-warning'>PENDING</span>";
                 }
 
             })

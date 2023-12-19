@@ -59,13 +59,13 @@
 
 
                                 <div class="col-md-6 form-group">
-                                    <label>Country</label>
+                                    <label>Country {{old('countries_id')}}</label>
                                     <select name="countries_id"
-                                        class="custom-select @error('countries_id') is-invalid @enderror">
+                                        class="form-control @error('countries_id') is-invalid @enderror">
                                         <option value="">Select Country</option>
-                                        <option value="1">Myanmar</option>
-                                        <option value="2">Albania</option>
-                                        <option value="3">Algeria</option>
+                                        <option value="1" @if(old('countries_id')==1) selected="selected" @endif>Myanmar</option>
+                                        <option value="2" @if(old('countries_id')==2) selected="selected" @endif>Chaina</option>
+                                        <option value="3" @if(old('countries_id')==3) selected="selected" @endif selected>Algeria</option>
                                     </select>
                                     @error('countries_id')
                                         <div className="invalid-feedback">
@@ -124,11 +124,11 @@
                                     <div class="col-md-6 form-group">
                                         <label>Country</label>
                                         <select name="countries_id"
-                                            class="custom-select @error('countries_id') is-invalid @enderror">
+                                            class="form-control @error('countries_id') is-invalid @enderror">
                                             <option value="">Select Country</option>
-                                            <option value="1">Myanmar</option>
-                                            <option value="2">Albania</option>
-                                            <option value="3">Algeria</option>
+                                            <option value="1" @if(old('countries_id')==1) selected="selected" @endif>Myanmar</option>
+                                            <option value="2" @if(old('countries_id')==2) selected="selected" @endif>Chaina</option>
+                                            <option value="3" @if(old('countries_id')==3) selected="selected" @endif selected>Algeria</option>
                                         </select>
                                         @error('countries_id')
                                             <div className="invalid-feedback">
@@ -218,28 +218,36 @@
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input name="payments_id" type="radio" class="custom-control-input" id="paypal"
-                                        value="1">
+                                        value="1"
+                                        {{ old('payments_id') == 1 ? 'checked' : '' }}
+                                        >
                                     <label class="custom-control-label" for="paypal">Paypal</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input name="payments_id" type="radio" class="custom-control-input"
-                                        id="directcheck" value="2">
+                                        id="directcheck" value="2"
+                                        {{ old('payments_id') == 2 ? 'checked' : '' }}
+                                        >
                                     <label class="custom-control-label" for="directcheck">Direct Check</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input name="payments_id" type="radio" class="custom-control-input"
-                                        id="banktransfer" value="3">
+                                        id="banktransfer" value="3"
+                                        {{ old('payments_id') == 3 ? 'checked' : '' }}
+                                        >
                                     <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <div class="custom-control custom-radio">
                                     <input name="payments_id" type="radio" class="custom-control-input" id="cod"
-                                        value="4">
+                                        value="4"
+                                        {{ old('payments_id') == 4 ? 'checked' : '' }}
+                                        >
                                     <label class="custom-control-label" for="cod">COD</label>
                                 </div>
                             </div>

@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label col-6 col-sm-5">Paid</label>
-                                <span><strong>
+                                  <span><strong>
                                         @if($order->paid_status ==1)
                                       <span class='badge badge-success'>PAID</span>
                                         @else

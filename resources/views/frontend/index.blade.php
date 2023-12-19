@@ -100,7 +100,7 @@
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="{{$recom->image}}" alt="">
                     <div class="product-action">
-                        <a class="btn btn-outline-dark btn-square" id="addToCart" data-id="{{$recom->id}}"><i class="fa fa-shopping-cart"></i></a>
+                        <button class="btn btn-outline-dark btn-square" id="addToCart" data-id="{{$recom->id}}"><i class="fa fa-shopping-cart"></i></button>
 
                         <a class="btn btn-outline-dark btn-square" href="{{route('front.product.show',$recom->id)}}"><i class="fa fa-info-circle"></i></a>
                     </div>

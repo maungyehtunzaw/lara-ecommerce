@@ -36,7 +36,7 @@ Route::group([
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::post('/orderconfirm','OrderController@confirm')->name('order.confirm');
 
-    Route::resource('product', 'ProductController');
+    Route::resource('product', 'ProductController'); //proudct.crate edit delte show 
     Route::resource('category', 'CategoryController');
     Route::resource('order', 'OrderController');
     Route::resource('user', 'UserController');

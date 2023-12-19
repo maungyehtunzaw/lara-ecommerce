@@ -57,6 +57,7 @@ class CartController extends Controller
     {
         return $this->cartRepository->removeFromCart($req);
     }
+
     public function savePayment(storeCheckOutRequest $req){
        $data= $this->cartRepository->storeCheckOut($req);
        if($data['success']) {

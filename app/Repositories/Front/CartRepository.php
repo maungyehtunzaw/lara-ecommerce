@@ -112,6 +112,7 @@ class CartRepository implements CartInterface
     {
         $productId = $req->input('product_id');
         $qty = $req->input('qty', 1);
+        $overWrite = $req->input('override', false);
 
         DB::beginTransaction();
         $product = Product::find($productId);
@@ -131,16 +132,26 @@ class CartRepository implements CartInterface
                 } else {
                     //update qty
                     $orderItem = OrderItem::where(['customers_id' => $customerId, 'products_id' => $productId])->first();
+                    if ($overWrite) {
+                        $orderItem->update(['qty' => $qty, 'total_amount' => $qty * $product->unit_rate, 'unit_rate' => $product->unit_rate]);
+                    } else
+                       {
                     $orderItem->update(['qty' => $qty + $orderItem->qty, 'total_amount' => ($qty + $orderItem->qty) * $product->unit_rate, 'unit_rate' => $product->unit_rate]);
+                       }
                 }
             } else {
                 //for guest user, save to session
                 $cart = Session::get('cart');
 
                 if (isset($cart[$productId])) { //existing item
+                    if ($overWrite) {
+                        $cart[$productId]['qty'] = $qty;
+                        $cart[$productId]['product']['unit_rate'] = $product->unit_rate;
+                    } else {
+                        $cart[$productId]['qty'] += $qty;
+                        $cart[$productId]['product']['unit_rate'] = $product->unit_rate; // on change price during session
+                    }
 
-                    $cart[$productId]['qty'] += $qty;
-                    $cart[$productId]['product']['unit_rate'] = $product->unit_rate; // on change price during session
                 } else {
                     $cart[$productId] = [
                         "id" => $product->id,
@@ -149,6 +160,7 @@ class CartRepository implements CartInterface
                             "id" => $product->id,
                             "name" => $product->name,
                             "unit_rate" => $product->unit_rate,
+                            "total_amount"=>$product->unit_rate*$qty,
                         ]
                     ];
                 }
@@ -171,6 +183,7 @@ class CartRepository implements CartInterface
     }
     public function removeFromCart(Request $req)
     {
+
         $productId = $req->input('product_id');
         DB::beginTransaction();
         $qty = 0;

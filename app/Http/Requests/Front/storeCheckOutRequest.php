@@ -30,6 +30,7 @@ class storeCheckOutRequest extends FormRequest
                 'countries_id'=>'required',
                 'address'=>'required',
                 'payments_id'=>'required',
+                'countries_id'=>'required'
                 //show me something copilot
 
             ];

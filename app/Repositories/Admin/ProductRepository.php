@@ -26,8 +26,9 @@ class ProductRepository implements ProductInterface
         // $product->qty = $data['qty'];
         $product->categories_id = $req->categories_id;
         $product->save();
-        DB::commit();
         $this->uploadImage($req->file('image'),$product->id);
+        DB::commit();
+
         // $this->uploadGallery($req->file('gallery'),$product->id);
         return true;
 
@@ -67,10 +68,12 @@ class ProductRepository implements ProductInterface
         $upload = $image->move(public_path('upload/products/'), $imageName);
         $this->resizeProductImage($upload,$imageName);
         $product = Product::find($productId);
-        $product->image = $imageName;
+        // $product->image = $imageName;
+        $product->image = fake()->imageUrl(640, 480, 'cats'); //just fake image
         $product->save();
         return $imageName;
     }
+
     private function uploadGallery($image = null,$productId){
         if($image!=null){
             foreach($image as $key=>$img){

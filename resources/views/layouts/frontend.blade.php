@@ -28,7 +28,7 @@
     <link href="/frontend/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/frontend/css/style.css" rel="stylesheet">
+    <link href="/frontend/css/style.css?appv2832" rel="stylesheet">
 </head>
 
 <body>

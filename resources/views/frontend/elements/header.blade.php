@@ -136,8 +136,8 @@
 
                             </div>
                         </div>
-                        {{-- <a href="{{route('front.cart')}}" class="nav-item nav-link">Cart</a>
-                        <a href="{{route('front.payment')}}" class="nav-item nav-link">Payment</a> --}}
+                       <a href="{{route('front.cart')}}" class="nav-item nav-link">Cart</a>
+                      {{--    <a href="{{route('front.payment')}}" class="nav-item nav-link">Payment</a> --}}
 
                         <a href="{{route('front.profile')}}" class="nav-item nav-link">
                            @auth('cus')

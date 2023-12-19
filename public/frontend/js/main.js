@@ -84,22 +84,6 @@
     });
 
 
-    // Product Quantity
-    $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        button.parent().parent().find('input').val(newVal);
-    });
-
     // Add to Cart Click
     // $('#addToCart').on('click', function (e) {
     $(document).on('click', '#addToCart', function(e) {
@@ -171,6 +155,7 @@
                 console.log('success');
                 console.log(data);
                 if (data.success === true) {
+
                     let totalQty = parseInt(cartTotalQty) - parseInt(data.qty);
                     $('span#cartQty').each(function(){
                         $(this).text(totalQty);
@@ -183,7 +168,7 @@
                           background: "linear-gradient(to right, #00b09b, #96c93d)",
                         }
                       }).showToast();
-                      calculateSubTotal();
+                      setTotalAmountCart();
 
                 }
             },
@@ -195,40 +180,15 @@
         });
     });
 
-    function onQtyChange(){
-        var _token = $('meta[name="csrf-token"]').attr('content');
-        var product_id = $(this).data('id');
-        var qty = $(this).parent().parent().find('input').val();
-        var url = '/updatecart'
-        $.ajax({
-          headers: {
-                    'X-CSRF-TOKEN': _token,
-                    // 'Content-Type': 'application/json',
-                },
-
-            url: url,
-            method: "POST",
-            data: {product_id: product_id, qty: qty},
-            success: function (data) {
-                console.log('success');
-                console.log(data);
-                if (data.success === true) {
 
 
-                }
-            }
-        });
-    }
-
-    function calculateSubTotal() {
-        console.log("calculateSubTotal");
-       var total = 0;
-        $("td#totalAmt").each(function() {
+    function setTotalAmountCart() { //refactor later
+        var total =0;
+        $("td.totalAmtAll").each(function() {
             console.log($(this).text());
             total += parseInt($(this).text());
         });
         $("#cartTotalAmount").text(total);
-
     }
 
 })(jQuery);

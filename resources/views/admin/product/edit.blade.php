@@ -9,7 +9,7 @@
 
     <div class="bg-white dark:bg-gray-800  p-2">
 
-        <form action="{{ route('product.update', $product->id) }}" method="POST">
+        <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -36,6 +36,7 @@
                             @enderror
                     </div>
                     <div class="form-group">
+                        <label>Product Category</label>
                         <select class="form-control  @error('categories_id') is-invalid @enderror" name="categories_id">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -49,6 +50,7 @@
 
                     </div>
                     <div class="form-group">
+                        <label>Unit Price</label>
                         <input type="text" name="unit_rate" placeholder="Product Price"
                             value="{{ old('unit_rate', $product->unit_rate) }}"
                             class="form-control @error('unit_rate') is-invalid @enderror" />
@@ -60,6 +62,7 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Product Description</label>
                         <textarea name="description" placeholder="Product Description" class="form-control  @error('description') is-invalid @enderror">{{ old('description', $product->description) }}</textarea>
                         @error('description')
                             <div className="invalid-feedback">
@@ -71,11 +74,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Product Image</label>
+                        <label>Product Main [Replace]</label>
                         <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="validatedInputGroupCustomFile" >
-                            <label class="custom-file-label" for="validatedInputGroupCustomFile">Choose file...</label>
-
+                            <input type="file" name="image" />
                         </div>
                         @error('image')
                             <div className="invalid-feedback">
@@ -83,7 +84,21 @@
                             </div>
                         @enderror
                     </div>
-                </div>
+                    <div class="">
+                        <h5>Main Image</h5>
+                        <img src="{{ $product->image}}" alt="" width="100px" height="100px">
+                    </div>
+                    {{-- <div class="form-group">
+                        <label>Product Gallery Image [Replace]</label>
+                        <div class="custom-file">
+                            <input type="file" name="gallery[]" />
+                        </div>
+                        @error('gallery')
+                            <div className="invalid-feedback">
+                                <span className="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
+                </div> --}}
 
             </div>
             <div class="flex justify-end p-3 space-x-2">

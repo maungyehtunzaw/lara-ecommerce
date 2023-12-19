@@ -70,7 +70,11 @@
 
         </div>
         <div class="row px-xl-5">
-            {{ $products->links() }}
+            <div class="col-md-12 d-flex">
+                <div class="mx-auto">
+                {{ $products->onEachSide(0)->links() }}
+                </div>
+            </div>
         </div>
     </div>
 

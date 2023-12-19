@@ -27,14 +27,17 @@
                             @foreach ($orderItems as $key => $cartItem)
                                 <tr id="cartRow_{{ $cartItem['product']['id'] }}">
                                     <td class="align-middle text-left pl-3">
-                                     <a href="{{route('front.product.show',$cartItem['product']['id'])}}"> {{ $cartItem['product']['name'] }}</a>
+                                        <a href="{{ route('front.product.show', $cartItem['product']['id']) }}">
+                                            {{ $cartItem['product']['name'] }}</a>
                                     </td>
                                     <td class="align-middle">{{ $cartItem['product']['unit_rate'] }}MMK</td>
                                     <td class="align-middle">
-                                        {{$cartItem['qty']}}
-                                        {{-- <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        {{-- {{$cartItem['qty']}} --}}
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-minus" id="changeQty('reduce')">
+                                                <button class="btn btn-sm btn-primary btn-minus"
+                                                    data-id="{{ $cartItem['product']['id'] }}"
+                                                    data-amt-id="{{ $cartItem['product']['unit_rate'] }}">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
@@ -42,13 +45,15 @@
                                                 class="form-control form-control-sm bg-secondary border-0 text-center"
                                                 value="{{ $cartItem['qty'] }}">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-plus">
+                                                <button class="btn btn-sm btn-primary btn-plus"
+                                                    data-id="{{ $cartItem['product']['id'] }}"
+                                                    data-amt-id="{{ $cartItem['product']['unit_rate'] }}">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </td>
-                                    <td class="align-middle" id="totalAmt">
+                                    <td class="align-middle totalAmtAll" id="totalAmt_{{ $cartItem['product']['id'] }}">
                                         {{ $cartItem['qty'] * $cartItem['product']['unit_rate'] }}</td>
                                     <td class="align-middle">
                                         <button class="btn btn-sm btn-danger" id="removeFromCartBtn"
@@ -83,7 +88,8 @@
                                 <h5>Total</h5>
                                 <h5>$160</h5>
                             </div> --}}
-                            <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="{{route('front.payment')}}">Proceed To
+                            <a class="btn btn-block btn-primary font-weight-bold my-3 py-3"
+                                href="{{ route('front.payment') }}">Proceed To
                                 Checkout</a>
                         </div>
                     </div>
@@ -97,13 +103,83 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            var total =0;
-            $("td#totalAmt").each(function() {
-                console.log($(this).text());
-                total += parseInt($(this).text());
-            });
-            $("#cartTotalAmount").text(total);
+            setTotalAmount();
 
+            function setTotalAmount() {
+                var total = 0;
+                $("td.totalAmtAll").each(function() {
+                    console.log($(this).text());
+                    total += parseInt($(this).text());
+                });
+                $("#cartTotalAmount").text(total);
+            }
+
+            $('.quantity button').on('click', function() {
+                var button = $(this);
+                var product_id = $(this).data('id');
+                var rate = $(this).data('amt-id');
+                var newVal = 0;
+                // console.log(product_id);
+                // console.log(rate);
+                var oldValue = button.parent().parent().find('input').val();
+                if (button.hasClass('btn-plus')) {
+                    newVal = parseFloat(oldValue) + 1;
+                    // console.log(newVal+"Plusss");
+                } else {
+                    if (oldValue > 1) {
+                        newVal = parseFloat(oldValue) - 1;
+                        // console.log(newVal+"Minusss");
+                    } else {
+                        newVal = 0;
+                        // console.log(newVal+"remove now");
+                    }
+                }
+                onQtyChangeData(product_id, rate, newVal);
+                button.parent().parent().find('input').val(newVal);
+            });
+
+            function onQtyChangeData(product_id, rate, qty) {
+                var url = "";
+                if (qty == 0) {
+                    url = '/removefromcart'
+                } else {
+                    url = '/addtocart'
+                }
+                console.log(url);
+                console.log(product_id + " rate" + rate + " qty" + qty);
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: product_id,
+                        qty: qty,
+                        override: true
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true) {
+                            if (qty == 0) {
+                                $("#cartRow_" + product_id).remove();
+
+                            } else {
+                                $("#totalAmt_" + product_id).text(rate * qty);
+
+                            }
+                            setTotalAmount();
+                            Toastify({
+                                text: response.message,
+                                className: "info",
+                                // style: {
+                                //     background: "linear-gradient(to right, #00b09b, #96c93d)",
+                                // }
+                            }).showToast();
+                        }
+
+
+                    }
+                });
+            }
 
         });
     </script>
