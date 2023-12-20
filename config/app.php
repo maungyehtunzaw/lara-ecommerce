@@ -168,7 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
@@ -192,7 +192,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         // 'Image' => Intervention\Image\Facades\Image::class
 
