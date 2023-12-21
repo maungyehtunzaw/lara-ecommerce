@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-    protected $table='e_categories';
+
     protected $guarded=[];
+    protected $table='e_categories';
 
     public function product():HasMany
     {

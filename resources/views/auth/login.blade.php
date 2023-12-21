@@ -7,7 +7,7 @@
             <div class="card-header text-center">
                <img src="{{ asset('img/logo.png') }}" alt="" width="100px">
                <h3 class="my-2">Administration</h3>
-               <p>yeye@gmial.com / yeyeyeye</p>
+               <p>yeye@gmail.com / yeyeyeye</p>
             </div>
 
             <div class="card-body">
