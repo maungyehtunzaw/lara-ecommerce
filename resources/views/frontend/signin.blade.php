@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 @section('title', 'Sign In')
 @section('content')
+
     <div class="d-flex justify-content-center align-items-center rounded-sm">
         <div class="card " style="width: 20rem">
 

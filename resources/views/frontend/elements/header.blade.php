@@ -52,7 +52,7 @@
                     <i class="fas fa-heart text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                 </a> --}}
-                <a href="" class="btn px-0 ml-2">
+                <a href="{{route('front.cart')}}" class="btn px-0 ml-2">
                     <i class="fas fa-shopping-cart text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;"><span id="cartQty">{{$total_qty}}</span> QTY</span>
                 </a>
@@ -113,7 +113,7 @@
         </div>
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+                <a href="{{route('front.home')}}" class="text-decoration-none d-block d-lg-none">
                     <span class="h1 text-uppercase text-dark bg-light px-2">ZAT</span>
                     <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">STORE</span>
                 </a>

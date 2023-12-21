@@ -45,7 +45,7 @@
         <div class="row">
             <h5 class="ml-3">Recent Order</h5>
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Id.</th>
@@ -97,7 +97,6 @@
                                         @endswitch
                                     </td>
                                     <td>{{ $order->created_at->format('Y-m-d H:i A') }}</td>
-                                    <td>{{ $order->payment_amount }}</td>
                                     <td>
                                         <a href="{{ route('order.show', $order->id) }}"
                                             class="btn btn-sm btn-primary">View</a>
