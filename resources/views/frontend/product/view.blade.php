@@ -41,11 +41,6 @@
                         <small class="pt-1">(99 Reviews)</small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">{{ $product->unit_rate }} MMK</h3>
-                    <p class="mb-4">
-                        {{ $product->description }}
-                    </p>
-
-
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -64,6 +59,13 @@
                                 class="fa fa-shopping-cart mr-1"></i> Add To
                             Cart</button>
                     </div>
+                    <p class="mb-4">
+                        {!! nl2br($product->description) !!}
+
+                    </p>
+
+
+
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
@@ -548,3 +550,34 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $('.quantity button').on('click', function() {
+                var button = $(this);
+                var product_id = $(this).data('id');
+                var rate = $(this).data('amt-id');
+                var newVal = 0;
+                // console.log(product_id);
+                // console.log(rate);
+                var oldValue = button.parent().parent().find('input').val();
+                if (button.hasClass('btn-plus')) {
+                    newVal = parseFloat(oldValue) + 1;
+                    // console.log(newVal+"Plusss");
+                } else {
+                    if (oldValue > 1) {
+                        newVal = parseFloat(oldValue) - 1;
+                        // console.log(newVal+"Minusss");
+                    } else {
+                        newVal = 1;
+                        // console.log(newVal+"remove now");
+                    }
+                }
+                // onQtyChangeData(product_id, rate, newVal);
+                button.parent().parent().find('input').val(newVal);
+            });
+
+        });
+</script>
+@endpush

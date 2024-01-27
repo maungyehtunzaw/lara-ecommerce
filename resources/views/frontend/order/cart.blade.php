@@ -55,6 +55,8 @@
                                     </td>
                                     <td class="align-middle totalAmtAll" id="totalAmt_{{ $cartItem['product']['id'] }}">
                                         {{ $cartItem['qty'] * $cartItem['product']['unit_rate'] }}</td>
+
+
                                     <td class="align-middle">
                                         <button class="btn btn-sm btn-danger" id="removeFromCartBtn"
                                             data-id="{{ $cartItem['product']['id'] }}">
